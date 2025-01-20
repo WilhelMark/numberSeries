@@ -12,5 +12,24 @@ int main() {
     }
     cout << endl;
 
+    // Logic to find the repeating number
+    bool seen[15] = {false}; 
+    int repeatingNumber = -1; 
+
+    for (int i = 0; i < 15; i++) {
+        if (seen[numbers[i] - numbers[0]]) {
+            repeatingNumber = numbers[i];
+            break;
+        } else {
+            seen[numbers[i] - numbers[0]] = true;
+        }
+    }
+
+    if (repeatingNumber != -1) {
+        cout << "The repeating number is: " << repeatingNumber << endl;
+    } else {
+        cout << "No repeating number found." << endl;
+    }
+
     return 0;
 }
