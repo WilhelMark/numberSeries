@@ -3,6 +3,7 @@ using namespace std;
 
 int main() {
     // Initialize an array of 15 positive integers
+    // The array contains 14 consecutive numbers starting from X, with one number repeated
     int numbers[15] = {114, 111, 106, 107, 108, 105, 115, 108, 110, 109, 112, 113, 116, 117, 118};
 
     // Output the initialized array
@@ -12,24 +13,31 @@ int main() {
     }
     cout << endl;
 
-    // Logic to find the repeating number
-    bool seen[15] = {false}; 
-    int repeatingNumber = -1; 
-
+    // Step 1: Calculate the sum of all elements in the array
+    int sumArray = 0;
     for (int i = 0; i < 15; i++) {
-        if (seen[numbers[i] - numbers[0]]) {
-            repeatingNumber = numbers[i];
-            break;
-        } else {
-            seen[numbers[i] - numbers[0]] = true;
+        sumArray += numbers[i];
+    }
+
+    // Step 2: Find the minimum number in the array (this will be X)
+    int minNumber = numbers[0];
+    for (int i = 1; i < 15; i++) {
+        if (numbers[i] < minNumber) {
+            minNumber = numbers[i];
         }
     }
 
-    if (repeatingNumber != -1) {
-        cout << "The repeating number is: " << repeatingNumber << endl;
-    } else {
-        cout << "No repeating number found." << endl;
+    // Step 3: Calculate the expected sum of the first 14 consecutive integers starting from X
+    int expectedSum = 0;
+    for (int i = 0; i < 14; i++) {
+        expectedSum += (minNumber + i);
     }
+
+    // Step 4: The difference between the actual sum and the expected sum is the repeating number
+    int repeatingNumber = sumArray - expectedSum;
+
+    // Output the result
+    cout << "The repeating number is: " << repeatingNumber << endl;
 
     return 0;
 }
